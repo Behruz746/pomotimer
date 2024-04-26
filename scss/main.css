@@ -226,6 +226,12 @@ body {
   cursor: pointer;
   transition: all 0.08s linear;
 }
+@media screen and (max-width: 480px) {
+  .setting .input__toggle {
+    width: 44px;
+    height: 28px;
+  }
+}
 .setting .input__toggle .round {
   width: 16px;
   height: 16px;
@@ -237,12 +243,24 @@ body {
   transform: translateY(-50%);
   transition: all 0.08s linear;
 }
+@media screen and (max-width: 480px) {
+  .setting .input__toggle .round {
+    width: 20px;
+    height: 20px;
+    left: 3px;
+  }
+}
 
 .input__toggle--active {
   background-color: rgb(136, 211, 23) !important;
 }
 .input__toggle--active .round {
   left: 16px !important;
+}
+@media screen and (max-width: 480px) {
+  .input__toggle--active .round {
+    left: 21px !important;
+  }
 }
 
 .settings__show {

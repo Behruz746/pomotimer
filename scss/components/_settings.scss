@@ -97,6 +97,10 @@
     position: relative;
     cursor: pointer;
     transition: all 0.08s linear;
+    @include mobile {
+      width: 44px;
+      height: 28px;
+    }
 
     .round {
       width: 16px;
@@ -108,6 +112,11 @@
       left: 2px;
       transform: translateY(-50%);
       transition: all 0.08s linear;
+      @include mobile {
+        width: 20px;
+        height: 20px;
+        left: 3px;
+      }
     }
   }
 }
@@ -116,6 +125,9 @@
   background-color: rgb(136, 211, 23) !important;
   .round {
     left: 32px - 16px !important;
+    @include mobile {
+      left: 41px - 20px !important;
+    }
   }
 }
 
