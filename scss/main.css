@@ -194,7 +194,7 @@ body {
 .setting input[type=number]::-webkit-inner-spin-button,
 .setting input[type=number]::-webkit-outer-spin-button {
   padding: 10px;
-  width: 30px;
+  width: 15px;
   height: 18px;
 }
 .setting input {
@@ -263,6 +263,11 @@ body {
   border-radius: 8px;
   transition: 0.2s ease;
 }
+@media screen and (max-width: 480px) {
+  .header__btn {
+    padding: 15px;
+  }
+}
 .header__btn:hover {
   background-color: rgba(248, 112, 112, 0.3960784314);
 }
@@ -271,9 +276,20 @@ body {
   font-weight: 600;
   color: #fff;
 }
+@media screen and (max-width: 480px) {
+  .header__btn h1 {
+    display: none;
+  }
+}
 .header__btn .header__btn__icon {
   width: 16px;
   height: 16px;
+}
+@media screen and (max-width: 480px) {
+  .header__btn .header__btn__icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .timer {
@@ -286,6 +302,12 @@ body {
   max-width: 340px;
   width: 100%;
 }
+@media screen and (max-width: 480px) {
+  .timer {
+    max-width: 450px;
+    margin-top: 0;
+  }
+}
 
 .timer__title {
   padding: 8px 16px;
@@ -297,9 +319,20 @@ body {
   background-color: rgba(248, 180, 180, 0.389);
   border: 2px solid #fff;
 }
+@media screen and (max-width: 480px) {
+  .timer__title {
+    padding: 4px 8px;
+  }
+}
 .timer__title img {
   width: 32px;
   height: 32px;
+}
+@media screen and (max-width: 480px) {
+  .timer__title img {
+    width: 24px;
+    height: 24px;
+  }
 }
 .timer__title h1 {
   font-size: 20px;
@@ -307,6 +340,11 @@ body {
   font-weight: 500;
   line-height: normal;
   color: #fff;
+}
+@media screen and (max-width: 480px) {
+  .timer__title h1 {
+    font-size: 18px;
+  }
 }
 
 .timer__clock {
@@ -319,6 +357,11 @@ body {
   font-weight: 200;
   line-height: 85%;
   color: #fff;
+}
+@media screen and (max-width: 480px) {
+  .timer__clock h1 {
+    font-size: 180px;
+  }
 }
 
 .timer__controler {

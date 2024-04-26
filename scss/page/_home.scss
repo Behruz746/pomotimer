@@ -7,6 +7,10 @@
   gap: 28px;
   max-width: 340px;
   width: 100%;
+  @include mobile {
+    max-width: 450px;
+    margin-top: 0;
+  }
 }
 
 .timer__title {
@@ -18,10 +22,17 @@
   border-radius: 9999px;
   background-color: rgba(248, 180, 180, 0.389);
   border: 2px solid #fff;
+  @include mobile {
+    padding: 4px 8px;
+  }
 
   img {
     width: 32px;
     height: 32px;
+    @include mobile {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   h1 {
@@ -30,6 +41,9 @@
     font-weight: 500;
     line-height: normal;
     color: #fff;
+    @include mobile {
+      font-size: 18px;
+    }
   }
 }
 
@@ -42,6 +56,9 @@
     font-weight: 200;
     line-height: 85%;
     color: #fff;
+    @include mobile {
+      font-size: 180px;
+    }
   }
 }
 
