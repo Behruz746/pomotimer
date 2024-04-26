@@ -16,18 +16,6 @@
   }
 }
 
-@mixin mobile-380px {
-  @media screen and (max-width: 375px) {
-    @content;
-  }
-}
-
-@mixin mobile-330px {
-  @media screen and (max-width: 330px) {
-    @content;
-  }
-}
-
 @mixin mobile-290px {
   @media screen and (max-width: 290px) {
     @content;

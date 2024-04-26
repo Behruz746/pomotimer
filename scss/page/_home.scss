@@ -8,8 +8,7 @@
   max-width: 340px;
   width: 100%;
   @include mobile {
-    max-width: 450px;
-    margin-top: 0;
+    margin-top: 15px;
   }
 }
 
@@ -59,6 +58,9 @@
     @include mobile {
       font-size: 180px;
     }
+    @include mobile-290px {
+      font-size: 130px;
+    }
   }
 }
 
@@ -68,10 +70,21 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  @include mobile {
+    margin-top: 50px;
+    gap: 14px;
+  }
+  @include mobile-290px {
+    margin-top: 0;
+  }
 
   .timer__btn {
     padding: 24px;
     border-radius: 24px;
+    @include mobile {
+      padding: 18px;
+      border-radius: 18px;
+    }
     img {
       width: 24px;
       height: 24px;
@@ -81,5 +94,9 @@
   .timer__btn-big {
     padding: 32px 48px;
     border-radius: 32px;
+    @include mobile {
+      padding: 24px 32px;
+      border-radius: 24px;
+    }
   }
 }
