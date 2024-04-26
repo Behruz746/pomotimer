@@ -7,6 +7,21 @@
   font-size: inherit;
 }
 
+button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+}
+
 body {
   font-family: "Roboto";
+  background-color: #ba4949ff;
+}
+
+.container {
+  max-width: 630px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
 }

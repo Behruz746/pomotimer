@@ -1,0 +1,42 @@
+.header {
+  width: 100%;
+  padding: 20px 0;
+  //   border: 1px solid rgb(255, 255, 255);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header__logo {
+    width: 102px;
+    height: auto;
+  }
+}
+
+.header__btn {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  background-color: #f8b6b626;
+  border-radius: 8px;
+  transition: 0.2s ease;
+  &:hover {
+    background-color: #f8707065;
+  }
+
+  h1 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .header__btn__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

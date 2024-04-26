@@ -1,0 +1,19 @@
+.btn__light-red {
+  background-color: #f8b6b626;
+  border-radius: 8px;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: #f8707065;
+  }
+}
+
+.btn__red {
+  background-color: rgba(249, 224, 224, 0.325);
+  border-radius: 8px;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: #f9c9c942;
+  }
+}

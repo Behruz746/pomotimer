@@ -13,10 +13,131 @@
   </head>
   <body>
     <header class="header">
-      <h1>Hello</h1>
+      <div class="container">
+        <img
+          width="102px"
+          height="32px"
+          src="./assets/img/svg/focus-text-logo-white.svg"
+          class="header__logo"
+          alt="web logo"
+        />
+        <button type="button" class="header__btn btn settings">
+          <img
+            width="32px"
+            height="32px"
+            src="./assets/img/svg/icons-settings.svg"
+            class="header__btn__icon"
+            alt="setting icon"
+          />
+          <h1>Sozlamalar</h1>
+        </button>
+      </div>
     </header>
-    <main class="main"></main>
-    <footer class="footer"></footer>
+    <main class="main">
+      <div class="container timer">
+        <div class="timer__title">
+          <img
+            width="32px"
+            height="32px"
+            src="./assets/img/svg/focus-brain.svg"
+            alt="brain icon"
+          />
+          <h1>Focus</h1>
+        </div>
+        <div class="timer__clock">
+          <h1 id="timer-clock">25 00</h1>
+        </div>
+
+        <div class="timer__controler">
+          <button type="button" class="timer__btn btn__light-red settings">
+            <img
+              width="24px"
+              height="24px"
+              src="./assets/img/svg/settings-dots.svg"
+              alt="dots icon"
+            />
+          </button>
+          <button type="button" class="timer__btn-big btn__red" id="timer-play">
+            <img
+              width="32px"
+              height="32px"
+              src="./assets/img/svg/play.svg"
+              alt="play icon"
+            />
+          </button>
+          <button
+            type="button"
+            class="timer__btn btn__light-red"
+            id="timer-skip"
+          >
+            <img
+              width="24px"
+              height="24px"
+              src="./assets/img/svg/skip.svg"
+              alt="skip icon"
+            />
+          </button>
+        </div>
+      </div>
+    </main>
+    <div class="settings__over settings__hide" id="settings-over">
+      <div class="settings__container">
+        <div class="settings__close setting">
+          <h1 class="settings__title">Settings</h1>
+          <button type="button" class="setting__close__btn">
+            <img
+              width="18px"
+              height="18px"
+              src="./assets/img/svg/clear.svg"
+              alt="clear icon"
+            />
+          </button>
+        </div>
+
+        <div class="settings__mode setting">
+          <h1>Tungi rejim</h1>
+          <div class="input__toggle" id="mode">
+            <div class="round"></div>
+          </div>
+        </div>
+
+        <div class="settings__focus setting">
+          <h1>Fokus davomiyligi</h1>
+          <input type="number" max="999" min="1" value="25" id="focus-length" />
+        </div>
+
+        <div class="settings__short-break setting">
+          <h1>Qisqa tanaffus davomiyligi</h1>
+          <input type="number" max="999" min="1" value="5" id="short-length" />
+        </div>
+
+        <div class="settings__long-break setting">
+          <h1>Uzoq tanaffus davomiyligi</h1>
+          <input type="number" max="999" min="1" value="15" id="long-length" />
+        </div>
+
+        <div class="settings__auto setting">
+          <h1>Auto resume timer</h1>
+          <div class="input__toggle" id="auto-play">
+            <div class="round"></div>
+          </div>
+        </div>
+
+        <div class="settings__sound setting">
+          <h1>Musiqa</h1>
+          <div class="input__toggle" id="music">
+            <div class="round"></div>
+          </div>
+        </div>
+
+        <div class="settings__sound setting" id="notifications">
+          <h1>Bildirishnomalar</h1>
+          <div class="input__toggle">
+            <div class="round"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./js/app.js"></script>
   </body>
 </html>
