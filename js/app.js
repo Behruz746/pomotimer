@@ -16,7 +16,7 @@ function innerDOM() {
       modeToggle: false,
       autoPlayToggle: false,
       musicToggle: false,
-      notificationsToggle: false,
+      notificationsToggle: true,
       play: false,
     },
     inputVals: {
@@ -26,16 +26,22 @@ function innerDOM() {
 
   function timerFun(num) {
     let count = num * 60;
+    if (settingsObj.toggles["notificationsToggle"]) {
+      document.querySelector("#start-audio").play();
+    }
+
     const timer = setInterval(function () {
       let minutes = Math.floor(count / 60);
       let seconds = count % 60;
-
-      timerClockEl.innerHTML = `${minutes.toString().padStart(2, "0")} ${seconds
+      let time = `${minutes.toString().padStart(2, "0")} ${seconds
         .toString()
         .padStart(2, "0")}`;
-
+      timerClockEl.innerHTML = time;
       if (count === 0) {
         clearInterval(timer);
+        if (settingsObj.toggles["notificationsToggle"]) {
+          document.querySelector("#stop-audio").play();
+        }
       } else {
         count--;
       }
@@ -52,8 +58,6 @@ function innerDOM() {
     } else {
       timerPlayEl.querySelector("img").src = "./assets/img/svg/play.svg";
     }
-
-    console.log(settingsObj.toggles["play"]);
   }
 
   timerPlayEl.addEventListener("click", playToggle);
