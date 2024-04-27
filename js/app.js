@@ -44,11 +44,10 @@ function innerDOM() {
       val--;
       innerTimerClock(val);
       if (val === 0) {
-        if (settingsObj.toggles["notificationsToggle"])
+        if (settingsObj.toggles["notificationsToggle"]) {
           document.querySelector("#stop-audio").play();
-        clearInterval(interval);
-        innerTimerClock(val);
-        val = +settingsObj.inputVals.focusVal * 60;
+        }
+        resetTimer();
       }
     }, 1000);
   }
@@ -58,6 +57,13 @@ function innerDOM() {
     clearInterval(interval);
     timerPlayEl.querySelector("img").src = "./assets/img/svg/play.svg";
     timerClockEl.style.fontWeight = "200";
+  }
+
+  function resetTimer() {
+    innerTimerClock(focusLengthEl.value * 60);
+    val = focusLengthEl.value * 60;
+    stopTimer();
+    playToggle();
   }
 
   function playToggle() {
@@ -76,6 +82,7 @@ function innerDOM() {
   timerPlayEl.addEventListener("click", playToggle);
   focusLengthEl.addEventListener("input", (e) => {
     let count = +e.target.value;
+    settingsObj.inputVals.focusVal = +count;
     settingsObj.toggles["play"] = false;
     innerTimerClock(count * 60);
     val = count * 60;
