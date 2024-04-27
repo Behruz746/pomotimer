@@ -11,6 +11,8 @@ function innerDOM() {
     timerPlayEl = document.querySelector("#timer-play"),
     timerClockEl = document.querySelector("#timer-clock");
 
+  let interval;
+  let val = focusLengthEl.value * 60;
   let settingsObj = {
     toggles: {
       modeToggle: false,
@@ -24,49 +26,63 @@ function innerDOM() {
     },
   };
 
-  function timerFun(num) {
-    let count = num * 60;
-    if (settingsObj.toggles["notificationsToggle"]) {
-      document.querySelector("#start-audio").play();
-    }
+  // get timer clock
+  function innerTimerClock(timeLeft) {
+    let num = timeLeft * 60;
+    let minutes = Math.floor(timeLeft / 60);
+    let secounds = timeLeft % 60;
+    let formattedTime = `${minutes.toString().padStart(2, "0")} ${secounds
+      .toString()
+      .padStart(2, "0")}`;
+    timerClockEl.innerHTML = formattedTime;
+  }
+  innerTimerClock(+settingsObj.inputVals.focusVal * 60);
 
-    const timer = setInterval(function () {
-      let minutes = Math.floor(count / 60);
-      let seconds = count % 60;
-      let time = `${minutes.toString().padStart(2, "0")} ${seconds
-        .toString()
-        .padStart(2, "0")}`;
-      timerClockEl.innerHTML = time;
-      if (count === 0) {
-        clearInterval(timer);
-        if (settingsObj.toggles["notificationsToggle"]) {
+  // start timer
+  function startTimer() {
+    interval = setInterval(() => {
+      val--;
+      innerTimerClock(val);
+      if (val === 0) {
+        if (settingsObj.toggles["notificationsToggle"])
           document.querySelector("#stop-audio").play();
-        }
-      } else {
-        count--;
+        clearInterval(interval);
+        innerTimerClock(val);
+        val = +settingsObj.inputVals.focusVal * 60;
       }
     }, 1000);
   }
 
+  // stop timer
+  function stopTimer() {
+    clearInterval(interval);
+    timerPlayEl.querySelector("img").src = "./assets/img/svg/play.svg";
+    timerClockEl.style.fontWeight = "200";
+  }
+
   function playToggle() {
     settingsObj.toggles["play"] = !settingsObj.toggles["play"];
-    timerClockEl.style.fontWeight = "800";
 
     if (settingsObj.toggles["play"]) {
-      timerFun(settingsObj.inputVals["focusVal"]);
+      startTimer();
       timerPlayEl.querySelector("img").src = "./assets/img/svg/pause.svg";
+      timerClockEl.style.fontWeight = "800";
+      document.querySelector("#start-audio").play();
     } else {
-      timerPlayEl.querySelector("img").src = "./assets/img/svg/play.svg";
+      stopTimer();
     }
   }
 
   timerPlayEl.addEventListener("click", playToggle);
   focusLengthEl.addEventListener("input", (e) => {
-    settingsObj.inputVals["focusVal"] = +e.target.value;
+    let count = +e.target.value;
+    settingsObj.toggles["play"] = false;
+    innerTimerClock(count * 60);
+    val = count * 60;
+    stopTimer();
   });
 
   // Setting inputs
-
   function inputToggler(obj, el) {
     settingsObj.toggles[obj] = !settingsObj.toggles[obj];
     if (settingsObj.toggles[obj]) {
