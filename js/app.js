@@ -8,8 +8,13 @@ function innerDOM() {
     inputMusicEl = document.querySelector(".music"),
     inputNotifiEl = document.querySelector(".notifications"),
     focusLengthEl = document.querySelector("#focus-length"),
+    shortLengthEl = document.querySelector("#short-length"),
+    longLengthEl = document.querySelector("#long-length"),
+    skipBtnEl = document.querySelector("#timer-skip"),
     timerPlayEl = document.querySelector("#timer-play"),
-    timerClockEl = document.querySelector("#timer-clock");
+    timerClockEl = document.querySelector("#timer-clock"),
+    timerTitleEl = document.querySelector("#timer-title"),
+    timerIconEl = document.querySelector("#timer-icon");
 
   let interval;
   let val = focusLengthEl.value * 60;
@@ -23,12 +28,55 @@ function innerDOM() {
     },
     inputVals: {
       focusVal: focusLengthEl.value,
+      shortVal: shortLengthEl.value,
     },
+    skipCount: 0,
+    timerIcon: "./assets/img/svg/focus-brain.svg",
+    timerTitle: "Focus",
   };
+
+  timerTitleEl.textContent = settingsObj.timerTitle;
+
+  function getSkip() {
+    settingsObj.skipCount++;
+
+    if (settingsObj.skipCount === 3) {
+      settingsObj.skipCount = 0;
+    }
+
+    if (settingsObj.skipCount === 0) {
+      timerTitleEl.textContent = "Focus";
+      timerIconEl.src = "/assets/img/svg/focus-brain.svg";
+      val = focusLengthEl.value * 60;
+      innerTimerClock(+focusLengthEl.value * 60);
+      resetTimer(focusLengthEl.value);
+    } else if (settingsObj.skipCount === 1) {
+      timerIconEl.src = "/assets/img/svg/coffee.svg";
+      timerTitleEl.textContent = "Short Break";
+      val = shortLengthEl.value * 60;
+      innerTimerClock(+shortLengthEl.value * 60);
+      resetTimer(shortLengthEl.value);
+    } else {
+      timerTitleEl.textContent = "Long Break";
+      val = longLengthEl.value * 60;
+      innerTimerClock(+longLengthEl.value * 60);
+      resetTimer(longLengthEl.value);
+    }
+
+    if (!settingsObj.toggles.autoPlayToggle) {
+      settingsObj.toggles["play"] = false;
+      stopTimer();
+    }
+  }
+
+  function autoPlay() {
+    if (settingsObj.toggles.autoPlayToggle) {
+      getSkip();
+    }
+  }
 
   // get timer clock
   function innerTimerClock(timeLeft) {
-    let num = timeLeft * 60;
     let minutes = Math.floor(timeLeft / 60);
     let secounds = timeLeft % 60;
     let formattedTime = `${minutes.toString().padStart(2, "0")} ${secounds
@@ -47,7 +95,8 @@ function innerDOM() {
         if (settingsObj.toggles["notificationsToggle"]) {
           document.querySelector("#stop-audio").play();
         }
-        resetTimer();
+        resetTimer(focusLengthEl.value);
+        autoPlay();
       }
     }, 1000);
   }
@@ -59,9 +108,9 @@ function innerDOM() {
     timerClockEl.style.fontWeight = "200";
   }
 
-  function resetTimer() {
-    innerTimerClock(focusLengthEl.value * 60);
-    val = focusLengthEl.value * 60;
+  function resetTimer(time) {
+    innerTimerClock(time * 60);
+    val = time * 60;
     stopTimer();
     playToggle();
   }
@@ -79,15 +128,14 @@ function innerDOM() {
     }
   }
 
-  timerPlayEl.addEventListener("click", playToggle);
-  focusLengthEl.addEventListener("input", (e) => {
+  function getInputVal(e) {
     let count = +e.target.value;
     settingsObj.inputVals.focusVal = +count;
     settingsObj.toggles["play"] = false;
     innerTimerClock(count * 60);
     val = count * 60;
     stopTimer();
-  });
+  }
 
   // Setting inputs
   function inputToggler(obj, el) {
@@ -141,6 +189,19 @@ function innerDOM() {
   inputNotifiEl.addEventListener("click", () =>
     inputToggler("notificationsToggle", inputNotifiEl)
   );
+
+  // play toggle
+  timerPlayEl.addEventListener("click", playToggle);
+  // input val
+  focusLengthEl.addEventListener("input", getInputVal);
+  longLengthEl.addEventListener("input", getInputVal);
+  shortLengthEl.addEventListener("input", getInputVal);
+
+  // skipped
+  skipBtnEl.addEventListener("click", () => {
+    getSkip();
+    stopTimer();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", innerDOM);
