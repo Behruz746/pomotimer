@@ -14,14 +14,17 @@ function innerDOM() {
     timerPlayEl = document.querySelector("#timer-play"),
     timerClockEl = document.querySelector("#timer-clock"),
     timerTitleEl = document.querySelector("#timer-title"),
-    timerIconEl = document.querySelector("#timer-icon");
+    timerIconEl = document.querySelector("#timer-icon"),
+    timerMusicEl = document.querySelector("#timer-music");
 
   let interval;
+  let settingsStore;
   let val = focusLengthEl.value * 60;
+
   let settingsObj = {
     toggles: {
       modeToggle: false,
-      autoPlayToggle: false,
+      autoPlayToggle: true,
       musicToggle: false,
       notificationsToggle: true,
       play: false,
@@ -35,8 +38,7 @@ function innerDOM() {
     timerTitle: "Focus",
   };
 
-  timerTitleEl.textContent = settingsObj.timerTitle;
-
+  // skip
   function getSkip() {
     settingsObj.skipCount++;
 
@@ -69,6 +71,7 @@ function innerDOM() {
     }
   }
 
+  // skip auto play
   function autoPlay() {
     if (settingsObj.toggles.autoPlayToggle) {
       getSkip();
@@ -92,7 +95,7 @@ function innerDOM() {
       val--;
       innerTimerClock(val);
       if (val === 0) {
-        if (settingsObj.toggles["notificationsToggle"]) {
+        if (settingsObj.toggles.notificationsToggle) {
           document.querySelector("#stop-audio").play();
         }
         resetTimer(focusLengthEl.value);
@@ -106,6 +109,7 @@ function innerDOM() {
     clearInterval(interval);
     timerPlayEl.querySelector("img").src = "./assets/img/svg/play.svg";
     timerClockEl.style.fontWeight = "200";
+    timerMusicEl.pause();
   }
 
   function resetTimer(time) {
@@ -115,16 +119,34 @@ function innerDOM() {
     playToggle();
   }
 
+  function timerStartMusic() {
+    if (settingsObj.toggles.musicToggle && settingsObj.toggles.play) {
+      timerMusicEl.play();
+      timerMusicEl.loop = true;
+      timerMusicEl.volume = 0.4;
+      timerMusicEl.autoplay = true;
+    }
+  }
+
   function playToggle() {
     settingsObj.toggles["play"] = !settingsObj.toggles["play"];
 
-    if (settingsObj.toggles["play"]) {
+    function timerPlay() {
+      if (settingsObj.toggles.notificationsToggle) {
+        document.querySelector("#start-audio").play();
+        document.querySelector("#start-audio").currentTime = 0;
+      }
+      timerStartMusic();
       startTimer();
       timerPlayEl.querySelector("img").src = "./assets/img/svg/pause.svg";
       timerClockEl.style.fontWeight = "800";
-      document.querySelector("#start-audio").play();
+    }
+
+    if (settingsObj.toggles["play"]) {
+      timerPlay();
     } else {
       stopTimer();
+      timerMusicEl.pause();
     }
   }
 
@@ -140,6 +162,11 @@ function innerDOM() {
   // Setting inputs
   function inputToggler(obj, el) {
     settingsObj.toggles[obj] = !settingsObj.toggles[obj];
+    timerStartMusic();
+    if (!settingsObj.toggles.musicToggle) {
+      timerMusicEl.pause();
+    }
+
     if (settingsObj.toggles[obj]) {
       el.classList.add("input__toggle--active");
     } else {
@@ -196,6 +223,7 @@ function innerDOM() {
   focusLengthEl.addEventListener("input", getInputVal);
   longLengthEl.addEventListener("input", getInputVal);
   shortLengthEl.addEventListener("input", getInputVal);
+  timerTitleEl.textContent = settingsObj.timerTitle;
 
   // skipped
   skipBtnEl.addEventListener("click", () => {
