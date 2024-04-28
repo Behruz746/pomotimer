@@ -21,7 +21,7 @@
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  background-color: #f8b6b626;
+  background-color: var(--background-btn);
   border-radius: 8px;
   transition: 0.2s ease;
   @include mobile {

@@ -1,5 +1,5 @@
 .btn__light-red {
-  background-color: #f8b6b626;
+  background-color: var(--background-btn-light);
   border-radius: 8px;
   transition: 0.2s ease;
   cursor: pointer;
@@ -9,7 +9,7 @@
 }
 
 .btn__red {
-  background-color: rgba(249, 224, 224, 0.325);
+  background-color: var(--background-btn);
   border-radius: 8px;
   transition: 0.2s ease;
   cursor: pointer;

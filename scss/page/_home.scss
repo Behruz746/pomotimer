@@ -19,7 +19,7 @@
   align-items: center;
   gap: 8px;
   border-radius: 9999px;
-  background-color: rgba(248, 180, 180, 0.389);
+  background-color: var(--background-btn-light);
   border: 2px solid #fff;
   @include mobile {
     padding: 4px 8px;

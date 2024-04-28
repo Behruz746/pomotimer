@@ -1,9 +1,19 @@
 :root {
-  --background: #fff;
+  --background: #ba4949ff;
+  --background-setting: #fff2f2;
+  --color: #471515;
+  --background-btn-light: #f8b6b626;
+  --background-btn: rgba(249, 224, 224, 0.325);
+  --border: rgba(0, 0, 0, 0.15);
+  --input: rgba(0, 0, 0, 0.24);
 }
-html[data-theme="light"] {
-  --background: #fff;
-}
-html[data-theme="dark"] {
-  --background: #131317;
+
+.dark-theme {
+  --background: #0d0404;
+  --background-setting: #0d0404;
+  --color: #fff;
+  --background-btn-light: #f8b6b626;
+  --background-btn: rgba(255, 76, 76, 0.71);
+  --border: rgba(255, 255, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.24);
 }

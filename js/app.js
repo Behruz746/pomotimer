@@ -18,12 +18,11 @@ function innerDOM() {
     timerMusicEl = document.querySelector("#timer-music");
 
   let interval;
-  let settingsStore;
   let val = focusLengthEl.value * 60;
 
   let settingsObj = {
     toggles: {
-      modeToggle: false,
+      modeToggle: localStorage.getItem("darkMode") === "true",
       autoPlayToggle: true,
       musicToggle: false,
       notificationsToggle: true,
@@ -157,14 +156,38 @@ function innerDOM() {
     innerTimerClock(count * 60);
     val = count * 60;
     stopTimer();
+
+    if (e.target === focusLengthEl) {
+      timerTitleEl.textContent = "Focus";
+      timerIconEl.src = "/assets/img/svg/focus-brain.svg";
+      settingsObj.skipCount = 0;
+    } else if (e.target === shortLengthEl) {
+      timerIconEl.src = "/assets/img/svg/coffee.svg";
+      timerTitleEl.textContent = "Short Break";
+      settingsObj.skipCount = 1;
+    } else {
+      timerTitleEl.textContent = "Long Break";
+      settingsObj.skipCount = 2;
+    }
   }
 
   // Setting inputs
-  function inputToggler(obj, el) {
-    settingsObj.toggles[obj] = !settingsObj.toggles[obj];
+  function inputToggler(obj, el, toggle) {
+    if (!toggle) {
+      settingsObj.toggles[obj] = !settingsObj.toggles[obj];
+    }
+
     timerStartMusic();
     if (!settingsObj.toggles.musicToggle) {
       timerMusicEl.pause();
+    }
+
+    if (settingsObj.toggles.modeToggle) {
+      document.body.classList.add("dark-theme");
+      localStorage.setItem("darkMode", "true");
+    } else {
+      document.body.classList.remove("dark-theme");
+      localStorage.setItem("darkMode", "false");
     }
 
     if (settingsObj.toggles[obj]) {
@@ -230,6 +253,7 @@ function innerDOM() {
     getSkip();
     stopTimer();
   });
+  inputToggler("modeToggle", inputModeEl, true);
 }
 
 document.addEventListener("DOMContentLoaded", innerDOM);
