@@ -134,17 +134,17 @@ function innerDOM() {
 
   function playToggle() {
     settingsObj.toggles["play"] = !settingsObj.toggles["play"];
-    if (!val == 0) {
-      startTimer();
-      settingsObj.toggles["play"] = false;
-    }
-    
     function timerPlay() {
       if (settingsObj.toggles.notificationsToggle) {
         document.querySelector("#start-audio").play();
         document.querySelector("#start-audio").currentTime = 0;
       }
       timerStartMusic();
+
+      if (!val == 0) {
+        startTimer();
+        settingsObj.toggles["play"] = false;
+      }
 
       timerPlayEl.querySelector("img").src = "./assets/img/svg/pause.svg";
       timerClockEl.style.fontWeight = "800";
