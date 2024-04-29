@@ -143,7 +143,6 @@ function innerDOM() {
 
       if (!val == 0) {
         startTimer();
-        settingsObj.toggles["play"] = false;
       }
 
       timerPlayEl.querySelector("img").src = "./assets/img/svg/pause.svg";

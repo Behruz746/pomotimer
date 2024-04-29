@@ -13,7 +13,6 @@
 .settings__container {
   display: flex;
   flex-direction: column;
-  padding-bottom: 16px;
   max-width: 400px;
   width: 100%;
   margin: 0 10px;
@@ -57,7 +56,7 @@
 
 .setting {
   width: 100%;
-  padding: 24px;
+  padding: 22px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,6 +131,37 @@
         left: 3px;
       }
     }
+  }
+}
+
+.setting__parametors {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  h1 {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    color: var(--color);
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #ba4949ff;
+  }
+
+  p {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    color: var(--color);
   }
 }
 
