@@ -19,6 +19,8 @@ function innerDOM() {
 
   let interval;
   let val = focusLengthEl.value * 60;
+  // localStorage.setItem("NotifiCall", true);
+  // localStorage.setItem("autoPlay", true);
 
   let settingsObj = {
     toggles: {
@@ -202,17 +204,12 @@ function innerDOM() {
       localStorage.setItem("playMusic", "false");
     }
 
-    if (settingsObj.toggles.notificationsToggle) {
-      localStorage.setItem("NotifiCall", "true");
-    } else {
-      localStorage.setItem("NotifiCall", "false");
-    }
-
     if (settingsObj.toggles[obj]) {
       el.classList.add("input__toggle--active");
     } else {
       el.classList.remove("input__toggle--active");
     }
+    localStorage.setItem("NotifiCall", "true");
   }
 
   // Settings Modal
@@ -230,6 +227,13 @@ function innerDOM() {
     if (e.target && e.target.classList.contains("settings__over")) {
       removeOverSettings();
     }
+  }
+
+  function pageRefresh(event) {
+    event.preventDefault();
+    event.returnValue = ""; // For Chrome
+    return ""; // For other browsers
+    alert("Sahifa yangilandi. O'chirishni xohlaysizmi?");
   }
 
   document.querySelector(
@@ -275,6 +279,12 @@ function innerDOM() {
   inputToggler("autoPlayToggle", inputAutoEl, true);
   inputToggler("musicToggle", inputMusicEl, true);
   inputToggler("notificationsToggle", inputNotifiEl, true);
+
+  window.addEventListener("beforeunload", (event) => {
+    if (settingsObj.toggles.play) {
+      pageRefresh(event);
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", innerDOM);
