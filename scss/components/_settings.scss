@@ -104,7 +104,7 @@
 
   .input__toggle {
     width: 34px;
-    height: 20px;
+    height: 19px;
     border-radius: 999px;
     background-color: var(--input);
     position: relative;
@@ -137,23 +137,9 @@
 .setting__parametors {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 24px;
-  h1 {
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.15px;
-    color: var(--color);
-  }
-
-  a {
-    text-decoration: none;
-    font-weight: 500;
-    color: #ba4949ff;
-  }
 
   p {
     font-size: 13px;
@@ -162,6 +148,7 @@
     line-height: normal;
     letter-spacing: 0.15px;
     color: var(--color);
+    opacity: 0.9;
   }
 }
 
