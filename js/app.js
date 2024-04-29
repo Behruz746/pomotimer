@@ -19,8 +19,6 @@ function innerDOM() {
 
   let interval;
   let val = focusLengthEl.value * 60;
-  // localStorage.setItem("NotifiCall", true);
-  // localStorage.setItem("autoPlay", true);
 
   let settingsObj = {
     toggles: {
@@ -87,7 +85,11 @@ function innerDOM() {
     let formattedTime = `${minutes.toString().padStart(2, "0")} ${secounds
       .toString()
       .padStart(2, "0")}`;
+    let formattedTimeTitle = `${minutes.toString().padStart(2, "0")}:${secounds
+      .toString()
+      .padStart(2, "0")}`;
     timerClockEl.innerHTML = formattedTime;
+    document.title = `${formattedTimeTitle} - Focusing on work - PomoTimer`;
   }
   innerTimerClock(+settingsObj.inputVals.focusVal * 60);
 
