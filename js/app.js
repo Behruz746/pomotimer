@@ -23,14 +23,15 @@ function innerDOM() {
   let settingsObj = {
     toggles: {
       modeToggle: localStorage.getItem("darkMode") === "true",
-      autoPlayToggle: true,
-      musicToggle: false,
-      notificationsToggle: true,
+      autoPlayToggle: localStorage.getItem("autoPlay") === "true",
+      musicToggle: localStorage.getItem("playMusic") === "true",
+      notificationsToggle: localStorage.getItem("NotifiCall") === "true",
       play: false,
     },
     inputVals: {
       focusVal: focusLengthEl.value,
       shortVal: shortLengthEl.value,
+      longVal: longLengthEl.value,
     },
     skipCount: 0,
     timerIcon: "./assets/img/svg/focus-brain.svg",
@@ -129,7 +130,6 @@ function innerDOM() {
 
   function playToggle() {
     settingsObj.toggles["play"] = !settingsObj.toggles["play"];
-
     function timerPlay() {
       if (settingsObj.toggles.notificationsToggle) {
         document.querySelector("#start-audio").play();
@@ -188,6 +188,24 @@ function innerDOM() {
     } else {
       document.body.classList.remove("dark-theme");
       localStorage.setItem("darkMode", "false");
+    }
+
+    if (settingsObj.toggles.autoPlayToggle) {
+      localStorage.setItem("autoPlay", "true");
+    } else {
+      localStorage.setItem("autoPlay", "false");
+    }
+
+    if (settingsObj.toggles.musicToggle) {
+      localStorage.setItem("playMusic", "true");
+    } else {
+      localStorage.setItem("playMusic", "false");
+    }
+
+    if (settingsObj.toggles.notificationsToggle) {
+      localStorage.setItem("NotifiCall", "true");
+    } else {
+      localStorage.setItem("NotifiCall", "false");
     }
 
     if (settingsObj.toggles[obj]) {
@@ -254,6 +272,9 @@ function innerDOM() {
     stopTimer();
   });
   inputToggler("modeToggle", inputModeEl, true);
+  inputToggler("autoPlayToggle", inputAutoEl, true);
+  inputToggler("musicToggle", inputMusicEl, true);
+  inputToggler("notificationsToggle", inputNotifiEl, true);
 }
 
 document.addEventListener("DOMContentLoaded", innerDOM);
